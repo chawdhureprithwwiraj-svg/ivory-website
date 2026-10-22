@@ -44,8 +44,8 @@ ticker:function(){noise(0,.4,'lowpass',700,.3);},
 coin:function(){tone(1046,0,.14,'triangle',.35);tone(1568,.09,.3,'triangle',.3);},
 right:function(){tone(523.25,0,.4,'triangle',.4);tone(659.25,.09,.4,'triangle',.4);tone(783.99,.18,.6,'triangle',.45);tone(1046.5,.27,.9,'sine',.3);},
 wrong:function(){tone(196,0,.9,'sine',.35);tone(247,.02,.8,'sine',.2);},
-spine:function(){noise(0,.09,'bandpass',320,.5,2);tone(180,0,.2,'sine',.4);},
-vault:function(){tone(110,0,2.6,'sine',.5);tone(276,0,1.8,'sine',.18);tone(412,0,1.2,'sine',.1);noise(0,.5,'lowpass',300,.2);},
+spine:function(){noise(0,.08,'bandpass',950,.5,3);tone(520,0,.12,'sine',.32);tone(1560,.01,.05,'sine',.12);},
+vault:function(){tone(110,0,2.2,'sine',.22);tone(528,0,1.9,'sine',.3);tone(664,0,1.5,'sine',.2);tone(792,0,1.1,'sine',.13);noise(0,.35,'bandpass',2100,.22,1.4);},
 mark:function(){var f=P[mi%5]*((mi/5|0)?2:1);mi=(mi+1)%10;tone(f,0,.35,'sine',.35);tone(f*2,0,.15,'sine',.12);},
 share:function(){noise(0,.5,'highpass',3000,.25);tone(1568,0,.6,'sine',.25);},
 emblem:function(){tone(2093,0,.12,'sine',.15);},
@@ -63,7 +63,7 @@ function paint(){mb.innerHTML=SH.muted()?'&#128277;':'&#128276;';}
 mb.addEventListener('click',function(){SH.toggle();paint();});
 document.addEventListener('DOMContentLoaded',function(){document.body.appendChild(mb);paint();});
 if(document.body){document.body.appendChild(mb);paint();}
-var RULES=[['#ringbtn','bellchime'],['.sharebtn','share'],['.ko .opt','coin'],['.spine','spine'],['#markbox','mark'],['.vt .door','vault'],['summary','faq'],['#tk','ticker'],['.btn-outline','outline'],['.btn','btn'],['a','link'],['.nav','nav']];
+var RULES=[['#ringbtn','bellchime'],['.sharebtn','share'],['.ko .opt','coin'],['.spine','spine'],['#markbox','mark'],['.vt .door','vault'],['summary','faq'],['.tk','ticker'],['.btn-outline','outline'],['.btn','btn'],['a','link'],['.nav','nav']];
 document.addEventListener('pointerdown',function(e){
 if(e.target.closest&&e.target.closest('.sndbtn'))return;
 for(var i=0;i<RULES.length;i++){if(e.target.closest&&e.target.closest(RULES[i][0])){SH.play(RULES[i][1]);return;}}
@@ -71,15 +71,14 @@ var im=e.target.closest?e.target.closest('img'):null;
 if(im&&/emblem|Ivory/i.test(im.getAttribute('alt')||''))SH.play('emblem');else SH.play('tap');
 },true);
 })();
-/* ---- 1 · the house ticker ---- */
 if($('#tkt')){(function(){
 var L=['The Ladder turns at four in the morning, house time.','Marks are earned, never bought.','The Vault keeps its own hours.','Every cheer freezes the ribbon for a moment.','Twelve rungs. One ladder. No shortcuts.','Private sessions are never recorded by the house.','Fifteen places a day on the Private Line, never more than forty.','The Firstlist is chosen in order, and the order is Ivory’s.','Bells ring at 0, 7, 14, 25, 39, 51, 69, 85, 111, 139, 151, 169, 185 and 201.','Gold is not a colour here. It is a manner.'];
 var C=['#D4AF37','#D42450','#FF9A1F','#14B87A','#9A55E6','#FF6FA5','#E3A857','#07402C','#D4AF37','#D42450'];
 var h='';for(var r=0;r<2;r++){for(var i=0;i<L.length;i++){h+='<span class="msg"><span class="med" style="background:radial-gradient(circle at 35% 30%,#FFF3C4,'+C[i]+' 72%)">'+(i+1)+'</span>'+L[i]+'</span>';}}
 $('#tkt').innerHTML=h;
-var tk=$('#tk');tk.addEventListener('click',function(){tk.classList.toggle('paused');SH.play('ticker')});
 })();}
-/* ---- 2 · house clock and the ladder strip ---- */
+/* ---- 1b · any ribbon hushes and holds ---- */
+$$('.tk').forEach(function(tk){tk.addEventListener('click',function(){tk.classList.toggle('paused');});});
 if($('#hclock')){(function(){
 var rg=$('#rungs');if(rg&&!rg.children.length){for(var i=0;i<12;i++){var e=document.createElement('i');e.style.height=(18+i*3)+'px';rg.appendChild(e);}}
 var li=0;
@@ -89,7 +88,6 @@ var cd=$('#hcd');if(cd)cd.textContent='THE LADDER TURNS IN '+p2(Math.floor(s/360
 if(rg){var k=rg.children;for(var i=0;i<k.length;i++)k[i].classList.toggle('lit',i<li);li=li>=12?1:li+1;}}
 tick();setInterval(tick,1000);
 })();}
-/* ---- 3 · the doorway round of the Golden Knock-off ---- */
 if($('#ko')){(function(){
 var Q=[{q:'What time does the Ivory Ladder turn to a new day?',o:['Midnight','Four in the morning, house time','Six in the evening','Noon'],a:1},
 {q:'How many Marks light the first treasure?',o:['10','25','50','100'],a:0},
@@ -104,7 +102,6 @@ function end(){el.innerHTML='<div class="qh">DOORWAY ROUND &middot; COMPLETE</di
 var a=$('#again');if(a)a.addEventListener('click',function(){qi=0;sc=0;render();});}
 render();
 })();}
-/* ---- 4 · the quiet door: three taps on any emblem ---- */
 (function(){
 var n=0,t0=0,sheet=null;
 function build(){if(sheet)return sheet;sheet=document.createElement('div');sheet.className='qdoor';sheet.setAttribute('role','dialog');sheet.setAttribute('aria-label','A quiet note');
@@ -115,19 +112,20 @@ setTimeout(function(){sheet.classList.remove('up');},7000);
 return sheet;}
 $$('img').forEach(function(im){var alt=(im.getAttribute('alt')||'');if(/emblem|Ivory/i.test(alt)){im.style.cursor='pointer';im.addEventListener('click',function(){var now=Date.now();if(now-t0>4000)n=0;t0=now;n++;if(n>=3){n=0;build();}});}});
 })();
-/* ---- 5 · the firstlist shelf ---- */
 if($$('.spine').length){(function(){
 var l=$('#shlock');
-$$('.spine').forEach(function(s){s.addEventListener('click',function(){s.classList.remove('shake');void s.offsetWidth;s.classList.add('shake');SH.play('spine');
+$$('.spine').forEach(function(s){s.addEventListener('click',function(){s.classList.remove('shake');void s.offsetWidth;s.classList.add('shake');
 if(l){l.textContent='Spine '+s.getAttribute('data-l')+' is locked. The Firstlist opens in the app.';setTimeout(function(){l.textContent='Chosen by Ivory, in order.';},2800);}});});
 })();}
-/* ---- 6 · the vault countdown ---- */
 if($('#vcd')){(function(){
 function tick(){var d=ist();var t=new Date(d);t.setHours(24,0,0,0);var s=Math.max(0,Math.floor((t-d)/1000));
 $('#vcd').textContent=p2(Math.floor(s/3600))+':'+p2(Math.floor(s/60)%60)+':'+p2(s%60);}
 tick();setInterval(tick,1000);
+var dr=document.querySelector('.vt .door');if(dr){var cap=document.querySelector('.vt .cap'),rest=cap?cap.textContent:'',cd=$('#vcd'),kt;
+dr.addEventListener('click',function(){dr.classList.add('knock');if(cd)cd.classList.add('flash');
+if(cap)cap.textContent='THE VAULT HEARS YOU. IT OPENS AT MIDNIGHT, HOUSE TIME.';clearTimeout(kt);
+kt=setTimeout(function(){dr.classList.remove('knock');if(cd)cd.classList.remove('flash');if(cap)cap.textContent=rest;},2800);});}
 })();}
-/* ---- 7 · gold dust in the hero ---- */
 if($('#dust')&&!RM){(function(){
 var cv=$('#dust'),host=cv.parentNode;
 function size(){cv.width=host.clientWidth;cv.height=host.clientHeight;}
@@ -139,7 +137,6 @@ for(var i=0;i<N;i++){var q=P[i];q.y-=q.v;if(q.y<-4){q.y=cv.height+4;q.x=Math.ran
 cx.beginPath();cx.arc(q.x,q.y,q.r,0,6.2832);cx.fillStyle='rgba(232,184,132,'+q.o+')';cx.fill();}}
 requestAnimationFrame(loop);})();
 })();}
-/* ---- 7 · scroll reveals ---- */
 if($$('.rv').length){(function(){
 if(RM||!('IntersectionObserver' in window)){$$('.rv').forEach(function(e){e.classList.add('in')});return;}
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.05});
