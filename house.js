@@ -87,7 +87,8 @@ var el=$('#pulse');
 fetch('download.html',{cache:'no-store'}).then(function(r){return r.text();}).then(function(t){
 var m=t.match(/status\s*:\s*['"](\w+)['"]/),v=t.match(/version\s*:\s*['"]([^'"]*)['"]/);
 var st=m?m[1]:'pending';
-if(st==='published'){el.textContent='BUILD '+(v&&v[1]?v[1]:'')+' IS LIVE ON THE RELEASE PAGE';el.classList.add('live');}
+if(st==='published'){el.textContent='BUILD '+(v&&v[1]?v[1]:'')+' IS LIVE ON THE RELEASE PAGE';el.classList.add('live');
+var band=$('#openband');if(band){band.textContent='THE HOUSE IS OPEN \u00b7 BUILD '+(v&&v[1]?v[1]:'')+' IS LIVE ON THE RELEASE PAGE';band.hidden=false;}}
 else{el.textContent='NEXT SELECTED BUILD: IN CHECKING';}
 el.hidden=false;
 }).catch(function(){el.hidden=true;});
@@ -102,6 +103,50 @@ else if(navigator.clipboard){navigator.clipboard.writeText(data.text+' '+data.ur
 else{toast(location.href);}
 });});
 })();}
+
+/* ---- 9 · the house mood line ---- */
+if($('#moodline')){(function(){
+function mood(){var h=ist().getHours();
+var m=h<4?'The house reads low and gold. The Vault is keeping its hours.':h<8?'The ladder has just turned. The house is stretching, bell by bell.':h<12?'Morning crosses the ribbon. Marks are being earned somewhere quiet.':h<17?'Midday: the Firstlist is open on a dozen screens, in order.':h<21?'Evening: private lines are being written, seventy words at a time.':'Night: the house dims to burgundy. Tomorrow turns at four.';
+$('#moodline').textContent=m;}
+mood();setInterval(mood,30000);
+})();}
+/* ---- 10 · the bell ring ---- */
+if($('#bellring')){(function(){
+var SET=[0,7,14,25,39,51,69,85,111,139,151,169,185,201],svg=$('#bellring'),NS='http://www.w3.org/2000/svg';
+function el(n,a){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);svg.appendChild(e);return e}
+var defs=document.createElementNS(NS,'defs');svg.appendChild(defs);
+SET.forEach(function(s,i){var g=document.createElementNS(NS,'radialGradient');g.id='bg'+i;
+g.innerHTML='<stop offset="0%" stop-color="#FFF3C4"/><stop offset="70%" stop-color="#D4AF37"/>';defs.appendChild(g);});
+el('circle',{cx:110,cy:110,r:86,fill:'none',stroke:'rgba(212,175,55,.35)','stroke-width':1});
+SET.forEach(function(s,i){var a=s/202*6.2832-1.5708;
+el('line',{x1:110+Math.cos(a)*86,y1:110+Math.sin(a)*86,x2:110+Math.cos(a)*74,y2:110+Math.sin(a)*74,stroke:'#D4AF37','stroke-width':2.4});
+el('circle',{cx:110+Math.cos(a)*68,cy:110+Math.sin(a)*68,r:4,fill:'url(#bg'+i+')'});});
+for(var d=0;d<202;d++){if(SET.indexOf(d)>=0)continue;var a=d/202*6.2832-1.5708;
+el('line',{x1:110+Math.cos(a)*86,y1:110+Math.sin(a)*86,x2:110+Math.cos(a)*80,y2:110+Math.sin(a)*80,stroke:'rgba(250,245,233,.28)','stroke-width':1});}
+var sweep=el('circle',{cx:196,cy:110,r:3.4,fill:'#FF9A1F'}),day=0,cap=$('#bellcap');
+setInterval(function(){day=(day+1)%202;var a=day/202*6.2832-1.5708;
+sweep.setAttribute('cx',110+Math.cos(a)*86);sweep.setAttribute('cy',110+Math.sin(a)*86);
+if(SET.indexOf(day)>=0){cap.textContent='Day '+day+': a bell falls. The house rings it once, softly, and writes it in your book.';}
+else{var nx=SET[0];for(var j=0;j<SET.length;j++){if(SET[j]>day){nx=SET[j];break;}}
+cap.textContent=day===201?'Day 201: the ring closes. Bell 0 begins again somewhere in the house.':'The light walks day '+day+' of 202. The next bell waits at day '+nx+'.';}
+},140);
+function chime(){try{var c=window.__ac||(window.__ac=new (window.AudioContext||window.webkitAudioContext)());
+[[880,0],[1318,.06],[1760,.12]].forEach(function(p,i){var o=c.createOscillator(),g=c.createGain();
+o.type='sine';o.frequency.value=p[0];g.gain.setValueAtTime(.0001,c.currentTime+p[1]);
+g.gain.exponentialRampToValueAtTime(.12/(i+1),c.currentTime+p[1]+.02);
+g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+p[1]+1.4);
+o.connect(g);g.connect(c.destination);o.start(c.currentTime+p[1]);o.stop(c.currentTime+p[1]+1.5);});}catch(e){}}
+var rb=$('#ringbtn');if(rb)rb.addEventListener('click',function(){chime();svg.style.transition='transform .18s';svg.style.transform='rotate(3deg)';setTimeout(function(){svg.style.transform='rotate(-3deg)'},180);setTimeout(function(){svg.style.transform=''},360);});
+})();}
+/* ---- 11 · ten marks, one treasure ---- */
+if($('#marks')){(function(){
+var box=$('#marks'),n=0,done=false;for(var i=0;i<10;i++)box.appendChild(document.createElement('i'));
+var cap=$('#markcap'),wrap=$('#markbox')||box;
+wrap.addEventListener('click',function(){if(done)return;n=Math.min(10,n+1);
+var k=box.children;for(var i=0;i<n;i++)k[i].classList.add('on');
+if(n>=10){done=true;$('#treas').classList.add('open');cap.textContent='TEN MARKS, EARNED NOT BOUGHT \u00b7 THE FIRST TREASURE OPENS \u00b7 AGAIN AT 25, AND AT ALL';}
+else cap.textContent='MARK '+n+' OF 10 \u00b7 EARNED, NEVER BOUGHT';});
+})();}
 })();
 /* END OF FILE - house.js */
-  
