@@ -1,0 +1,143 @@
+/* Ivory house stylesheet — components + the jewel refresh. Linked by every page, after each page's own styles. */
+:root{--ruby:#D42450;--rose:#FF6FA5;--amethyst:#9A55E6;--jade:#14B87A;--saffron:#FF9A1F;--jg:linear-gradient(90deg,#D42450,#FF9A1F,#D4AF37,#14B87A,#9A55E6,#FF6FA5)}
+/* jewel hairline over the whole house */
+body:before{content:"";position:fixed;top:0;left:0;right:0;height:3px;background:var(--jg);background-size:220% 100%;animation:jflow 9s linear infinite;z-index:999;pointer-events:none}
+@keyframes jflow{from{background-position:0% 0}to{background-position:220% 0}}
+::selection{background:#D4AF37;color:#4A0E17}
+html{scroll-behavior:smooth}
+body::-webkit-scrollbar{width:10px}body::-webkit-scrollbar-track{background:#F6EDDD}body::-webkit-scrollbar-thumb{border-radius:99px;background:linear-gradient(180deg,#D4AF37,#A8731A)}
+/* headings wear a jewel underline */
+h2{position:relative}
+h2:after{content:"";display:block;width:70px;height:3px;margin:10px 0 0;border-radius:99px;background:var(--jg);background-size:220% 100%;animation:jflow 9s linear infinite}
+.head h2:after,.cta h2:after,.screen h2:after,.kte h2:after,.jbox h2:after,.stage h2:after{margin-left:auto;margin-right:auto}
+/* contact boxes on the policy pages wear a jewel spine */
+.box{position:relative;overflow:hidden}
+.box:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,#D42450,#FF9A1F,#D4AF37,#14B87A,#9A55E6)}
+/* footer links hover in jewels */
+.footlinks a:nth-child(6n+1):hover,.footnav a:nth-child(6n+1):hover{color:#D42450}
+.footlinks a:nth-child(6n+2):hover,.footnav a:nth-child(6n+2):hover{color:#FF9A1F}
+.footlinks a:nth-child(6n+3):hover,.footnav a:nth-child(6n+3):hover{color:#14B87A}
+.footlinks a:nth-child(6n+4):hover,.footnav a:nth-child(6n+4):hover{color:#9A55E6}
+.footlinks a:nth-child(6n+5):hover,.footnav a:nth-child(6n+5):hover{color:#FF6FA5}
+.footlinks a:nth-child(6n+6):hover,.footnav a:nth-child(6n+6):hover{color:#A8731A}
+/* FAQ cards: jewel edges and markers */
+.faq details{position:relative;overflow:hidden}
+.faq details:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--jade)}
+.faq details:nth-child(5n+1):before{background:var(--ruby)}.faq details:nth-child(5n+2):before{background:var(--saffron)}.faq details:nth-child(5n+3):before{background:var(--jade)}.faq details:nth-child(5n+4):before{background:var(--amethyst)}.faq details:nth-child(5n+5):before{background:var(--rose)}
+.faq details:nth-child(5n+1) summary:after{color:var(--ruby)}.faq details:nth-child(5n+2) summary:after{color:var(--saffron)}.faq details:nth-child(5n+3) summary:after{color:var(--jade)}.faq details:nth-child(5n+4) summary:after{color:var(--amethyst)}.faq details:nth-child(5n+5) summary:after{color:var(--rose)}
+/* experience cards: jewel crown and number chip */
+.grid .card{position:relative;overflow:hidden}
+.grid .card:before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--peach))}
+.grid .card:nth-child(6n+1):before{background:linear-gradient(90deg,#D4AF37,#E8B884)}.grid .card:nth-child(6n+2):before{background:linear-gradient(90deg,#D42450,#FF6FA5)}.grid .card:nth-child(6n+3):before{background:linear-gradient(90deg,#9A55E6,#5C1222)}.grid .card:nth-child(6n+4):before{background:linear-gradient(90deg,#14B87A,#07402C)}.grid .card:nth-child(6n+5):before{background:linear-gradient(90deg,#FF9A1F,#E3A857)}.grid .card:nth-child(6n+6):before{background:linear-gradient(90deg,#FF6FA5,#D42450)}
+.grid .card:nth-child(6n+2) .num{background:linear-gradient(135deg,#D42450,#FF6FA5);color:#FFF8E8;border-color:rgba(212,36,80,.6)}
+.grid .card:nth-child(6n+3) .num{background:linear-gradient(135deg,#9A55E6,#5C1222);color:#FFF8E8;border-color:rgba(154,85,230,.6)}
+.grid .card:nth-child(6n+4) .num{background:linear-gradient(135deg,#14B87A,#07402C);color:#FFF8E8;border-color:rgba(20,184,122,.6)}
+.grid .card:nth-child(6n+5) .num{background:linear-gradient(135deg,#FF9A1F,#E3A857);border-color:rgba(255,154,31,.6)}
+.grid .card:nth-child(6n+6) .num{background:linear-gradient(135deg,#FF6FA5,#D42450);color:#FFF8E8;border-color:rgba(255,111,165,.6)}
+/* the ribbon flows through jewels */
+.ribbon{background:linear-gradient(90deg,#E3A857,#D4AF37,#14B87A,#9A55E6,#D42450,#FF9A1F,#E3A857);background-size:300% 100%;animation:jflow 16s linear infinite;color:#FFF8E8;text-shadow:0 1px 2px rgba(74,14,23,.5)}
+/* every gold button carries a slow sheen */
+.btn{position:relative;overflow:hidden}
+.btn:after{content:"";position:absolute;top:0;left:-70%;width:38%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.6),transparent);animation:btnsh 4.6s ease-in-out infinite;pointer-events:none}
+@keyframes btnsh{0%{left:-70%}55%,100%{left:135%}}
+/* scroll reveal */
+.rv{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease}
+.rv.in{opacity:1;transform:none}
+/* release pulse chip */
+.pulse{display:inline-block;margin-left:8px;padding:4px 10px;border-radius:99px;border:1px solid rgba(212,175,55,.7);background:rgba(212,175,55,.14);color:#F2D77C;font:900 8px/1.5 Verdana,sans-serif;letter-spacing:.12em;vertical-align:middle}
+.pulse.live{background:linear-gradient(90deg,#14B87A,#07402C);color:#FFF8E8;border-color:rgba(20,184,122,.8)}
+/* share toast */
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);padding:10px 16px;border-radius:99px;background:linear-gradient(90deg,#5C1222,#4A0E17);border:1px solid rgba(212,175,55,.7);color:#FAF5E9;font:700 11px/1.4 Verdana,sans-serif;z-index:1000;box-shadow:0 10px 26px rgba(74,14,23,.4)}
+/* quiet door note (injected by house.js) */
+.qdoor{position:fixed;left:50%;bottom:0;transform:translate(-50%,110%);width:min(92vw,380px);padding:18px 16px 16px;border-radius:20px 20px 0 0;background:linear-gradient(180deg,#5C1222,#4A0E17);border:1px solid rgba(212,175,55,.65);border-bottom:0;color:#FAF5E9;text-align:center;font:15px/1.6 Georgia,serif;z-index:1001;transition:transform .55s cubic-bezier(.2,.9,.3,1.1);box-shadow:0 -14px 40px rgba(74,14,23,.45)}
+.qdoor.up{transform:translate(-50%,0)}
+.qdoor .qn{margin:0 0 12px}
+.qdoor .qj{color:rgba(250,245,233,.6);font:9px/1.6 Verdana,sans-serif;letter-spacing:.14em;margin-top:10px}
+/* gold dust canvas in the hero */
+.hero-card #dust{position:absolute;inset:0;pointer-events:none;z-index:0}
+/* dark jewel stage used by the new home sections */
+.stage{position:relative;overflow:hidden;padding:clamp(20px,4vw,34px);border:1px solid rgba(212,175,55,.74);border-radius:28px;background:radial-gradient(circle at 12% 8%,rgba(212,36,80,.28),transparent 34%),radial-gradient(circle at 88% 12%,rgba(154,85,230,.26),transparent 32%),radial-gradient(circle at 82% 92%,rgba(20,184,122,.24),transparent 34%),radial-gradient(circle at 8% 88%,rgba(255,154,31,.22),transparent 30%),linear-gradient(150deg,#5C1222,#4A0E17 55%,#3B0B14);color:#FAF5E9}
+.stage .kicker{color:#F2D77C}
+.stage h2{color:#FFF8E8}
+.stage .lead{margin:0 auto;max-width:560px;color:rgba(250,245,233,.82);font-size:13.5px}
+/* 1 · house ticker */
+.tk{height:46px;overflow:hidden;display:flex;align-items:center;background:linear-gradient(90deg,#3B0B14,#5C1222 40%,#3B0B14);border-top:1px solid rgba(212,175,55,.45);border-bottom:1px solid rgba(212,175,55,.45)}
+.tk .track{display:flex;gap:36px;white-space:nowrap;padding-left:24px;animation:tkm 46s linear infinite;will-change:transform}
+.tk.paused .track{animation-play-state:paused}
+@keyframes tkm{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.tk .msg{display:inline-flex;align-items:center;gap:9px;color:#FAF5E9;font:12.5px/1 Georgia,serif}
+.tk .med{width:17px;height:17px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font:900 8px/1 Verdana,sans-serif;color:#2A0710;box-shadow:0 2px 7px rgba(0,0,0,.45),inset 0 1px 2px rgba(255,255,255,.55)}
+/* 2 · house clock + ladder */
+.clk{display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between;margin-top:16px}
+.clk .t{color:#F2D77C;font:950 clamp(20px,4vw,30px)/1 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.06em;text-shadow:0 0 18px rgba(212,175,55,.45)}
+.clk .lbl{color:rgba(250,245,233,.68);font:900 8px/1.6 Verdana,sans-serif;letter-spacing:.16em}
+.rungs{display:flex;gap:5px;align-items:flex-end;height:56px;margin-top:6px}
+.rungs i{width:10px;border-radius:3px 3px 0 0;background:rgba(212,175,55,.2);transition:background .45s,box-shadow .45s}
+.rungs i.lit{box-shadow:0 0 12px currentColor}
+.rungs i:nth-child(6n+1).lit{background:linear-gradient(180deg,#F6DC8A,#D4AF37);color:rgba(212,175,55,.8)}
+.rungs i:nth-child(6n+2).lit{background:linear-gradient(180deg,#FF8BA6,#D42450);color:rgba(212,36,80,.8)}
+.rungs i:nth-child(6n+3).lit{background:linear-gradient(180deg,#FFC46B,#FF9A1F);color:rgba(255,154,31,.8)}
+.rungs i:nth-child(6n+4).lit{background:linear-gradient(180deg,#7BE3B3,#14B87A);color:rgba(20,184,122,.8)}
+.rungs i:nth-child(6n+5).lit{background:linear-gradient(180deg,#C99BF2,#9A55E6);color:rgba(154,85,230,.8)}
+.rungs i:nth-child(6n+6).lit{background:linear-gradient(180deg,#FFA8C6,#FF6FA5);color:rgba(255,111,165,.8)}
+/* 3 · doorway round of the Knock-off */
+.ko{margin-top:16px;text-align:center;perspective:900px}
+.ko .qh{color:rgba(250,245,233,.72);font:900 8px/1 Verdana,sans-serif;letter-spacing:.18em;margin-bottom:12px}
+.ko .qcard{margin:0 auto;max-width:460px;background:linear-gradient(160deg,#FFFDF6,#FAF0DC);border-radius:18px;padding:20px 16px;color:#4A0E17;box-shadow:0 14px 34px rgba(0,0,0,.4);transition:transform .5s}
+.ko .qcard.flip{transform:rotateY(90deg)}
+.ko .qt{font-size:clamp(16px,3.4vw,19px);line-height:1.4;margin:0 0 12px;font-weight:700}
+.ko .opt{display:block;width:100%;margin:7px 0;padding:11px 13px;border-radius:12px;border:1px solid rgba(212,175,55,.55);background:#FFFCF2;color:#4A0E17;font:700 13px/1.35 Georgia,serif;text-align:left;cursor:pointer;transition:transform .15s}
+.ko .opt:hover{transform:translateX(3px)}
+.ko .opt.right{background:linear-gradient(90deg,#D4AF37,#E3A857);border-color:#D4AF37}
+.ko .opt.wrong{background:rgba(74,14,23,.1);border-color:rgba(74,14,23,.4);opacity:.75}
+.ko .score{width:82px;height:82px;margin:6px auto 12px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#F6DC8A,#D4AF37 58%,#A8731A);display:flex;align-items:center;justify-content:center;font:950 26px/1 Georgia,serif;color:#3B0B14;box-shadow:0 10px 26px rgba(0,0,0,.5),inset 0 2px 4px rgba(255,255,255,.6)}
+.ko .end{color:#FAF5E9;font-size:14px;max-width:430px;margin:0 auto 14px}
+/* 5 + 6 · shelf and vault, side by side on wide screens */
+.duo{display:grid;gap:18px;grid-template-columns:1fr}
+@media(min-width:780px){.duo{grid-template-columns:1fr 1fr}}
+.sh{text-align:center;padding:6px 4px 0}
+.sh .spines{display:flex;gap:12px;justify-content:center;align-items:flex-end;height:126px}
+.sh .spine{width:46px;border-radius:8px 8px 3px 3px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:10px 0;cursor:pointer;color:#3B0B14;font:950 15px/1 Georgia,serif;box-shadow:0 10px 22px rgba(0,0,0,.45),inset 0 2px 3px rgba(255,255,255,.5);user-select:none}
+.sh .spine small{font:900 6.5px/1.4 Verdana,sans-serif;letter-spacing:.1em;writing-mode:vertical-rl;opacity:.8}
+.sh .spine:nth-child(1){height:116px;background:linear-gradient(180deg,#F6DC8A,#D4AF37 45%,#A8731A)}
+.sh .spine:nth-child(2){height:126px;background:linear-gradient(180deg,#FF8BA6,#D42450 55%,#8E1030);color:#FFF8E8}
+.sh .spine:nth-child(3){height:106px;background:linear-gradient(180deg,#C99BF2,#9A55E6 55%,#5B2193);color:#FFF8E8}
+.sh .spine.shake{animation:shk .45s}
+@keyframes shk{0%,100%{transform:rotate(0)}25%{transform:rotate(-5deg)}60%{transform:rotate(5deg)}}
+.sh .lock{color:rgba(250,245,233,.72);font:11px/1.6 Verdana,sans-serif;margin-top:12px;min-height:18px}
+.vt{text-align:center;padding:6px 4px 0}
+.vt .door{width:122px;height:152px;margin:0 auto;border-radius:62px 62px 6px 6px;background:linear-gradient(160deg,#6B1826,#4A0E17 70%);border:2px solid rgba(212,175,55,.7);position:relative;box-shadow:0 16px 34px rgba(0,0,0,.5),inset 0 0 32px rgba(0,0,0,.5)}
+.vt .door:after{content:"";position:absolute;left:50%;top:56%;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#F6DC8A,#D4AF37 70%);box-shadow:0 0 16px rgba(212,175,55,.95);animation:gl 3.2s ease-in-out infinite}
+@keyframes gl{0%,100%{opacity:.5}50%{opacity:1}}
+.vt .cd{color:#F2D77C;font:950 19px/1 ui-monospace,Menlo,Consolas,monospace;margin-top:12px;letter-spacing:.08em}
+.vt .cap{color:rgba(250,245,233,.68);font:10px/1.7 Verdana,sans-serif;margin-top:6px;letter-spacing:.1em}
+/* journal teaser */
+.kte{display:grid;gap:16px;grid-template-columns:1fr}
+@media(min-width:780px){.kte{grid-template-columns:1.1fr .9fr;align-items:center}}
+.jbox{padding:20px 18px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(145deg,#FFFDF7,#FDF4E2);box-shadow:0 8px 22px rgba(74,14,23,.07)}
+.jbox .jd{color:#07402C;font:900 8px/1.6 Verdana,sans-serif;letter-spacing:.16em}
+.jbox h3{margin:6px 0 6px;font-size:18px}
+.jbox p{margin:0;color:rgba(74,14,23,.76);font-size:12.5px;line-height:1.65}
+/* press + journal pages */
+.pwrap{width:min(92vw,760px);margin:0 auto}
+.phead{padding:14px 0;border-bottom:1px solid rgba(212,175,55,.56);background:#FFFCF2}
+.pbrand{display:flex;align-items:center;gap:12px;text-decoration:none;color:#4A0E17}
+.pbrand img{width:44px;height:44px;border-radius:12px;border:2px solid #D4AF37}
+.pbrand b{font-size:19px;letter-spacing:.2em}
+.pbrand small{display:block;font-size:8px;letter-spacing:.14em;color:rgba(74,14,23,.76);font-family:Verdana,sans-serif}
+.jentry{padding:18px 18px 16px;border:1px solid rgba(212,175,55,.56);border-radius:18px;background:#FFFCF2;margin:14px 0;position:relative;overflow:hidden}
+.jentry:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--jg)}
+.jentry .jd{color:#07402C;font:900 8px/1.6 Verdana,sans-serif;letter-spacing:.16em}
+.jentry h3{margin:6px 0 8px;font-size:19px;color:#4A0E17}
+.jentry p{margin:0 0 8px;color:rgba(74,14,23,.78);font-size:13.5px}
+.jentry p:last-child{margin:0}
+/* reduced motion: the house sits still */
+@media(prefers-reduced-motion:reduce){
+body:before,.ribbon,.btn:after,h2:after{animation:none}
+.tk .track{animation:none}
+.hero-card #dust{display:none}
+.rv{opacity:1;transform:none;transition:none}
+.vt .door:after{animation:none}
+}
+/* END OF FILE - house.css */
+                                                                                                                                                                                                                                                                                                                                                                                                      
