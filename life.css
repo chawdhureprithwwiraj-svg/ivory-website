@@ -13,8 +13,7 @@
 .card{transition:transform .25s ease,box-shadow .25s ease}
 .card:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(74,14,23,.16)}
 .card:active{transform:translateY(1px)}
-@keyframes jewel{0%,100%{border-color:rgba(212,36,80,.5)}25%{border-color:rgba(255,154,31,.5)}50%{border-color:rgba(20,184,122,.45)}75%{border-color:rgba(154,85,230,.5)}}
-@supports selector(.a:has(*)){section:has(#bellring),section:has(.vt),section:has(#ko){border:1px solid transparent;animation:jewel 9s linear infinite}}
+.jew{border:1px solid rgba(212,175,55,.5)}
 .med{animation:medturn .6s ease both}
 @keyframes medturn{from{transform:rotate(-90deg) scale(.6)}}
 circle.comet{animation:cometk 2s ease-out 1}
@@ -27,5 +26,5 @@ body.m-eve{background-image:linear-gradient(180deg,rgba(212,36,80,.05),rgba(250,
 body.m-night{background-image:linear-gradient(180deg,rgba(154,85,230,.07),rgba(250,245,233,0) 34%)}
 ::view-transition-old(root){animation:vtout .18s ease both}::view-transition-new(root){animation:vtin .18s ease both}
 @keyframes vtout{to{opacity:0}}@keyframes vtin{from{opacity:0}}
-@media(prefers-reduced-motion:reduce){#thread{display:none}.hero em{animation:none;background:none;color:#E9C767}.rv>*{opacity:1;transform:none;transition:none}.rip,.med,circle.comet{animation:none}.card:hover,.card:active{transform:none}section:has(#bellring){animation:none}}
+@media(prefers-reduced-motion:reduce){#thread{display:none}.hero em{animation:none;background:none;color:#E9C767}.rv>*{opacity:1;transform:none;transition:none}.rip,.med,circle.comet{animation:none}.card:hover,.card:active{transform:none}}
 /* END OF FILE - life.css */
