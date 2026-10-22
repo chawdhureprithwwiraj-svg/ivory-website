@@ -112,6 +112,11 @@ h2:after{content:"";display:block;width:70px;height:3px;margin:10px 0 0;border-r
 @keyframes gl{0%,100%{opacity:.5}50%{opacity:1}}
 .vt .cd{color:#F2D77C;font:950 19px/1 ui-monospace,Menlo,Consolas,monospace;margin-top:12px;letter-spacing:.08em}
 .vt .cap{color:rgba(250,245,233,.68);font:10px/1.7 Verdana,sans-serif;margin-top:6px;letter-spacing:.1em}
+.vt .door{transition:box-shadow .3s,transform .3s}
+.vt .door.knock{box-shadow:0 0 0 6px rgba(212,175,55,.28),0 0 34px rgba(255,154,31,.55),inset 0 0 32px rgba(0,0,0,.5);transform:scale(1.035)}
+.vt .cd{transition:color .3s,text-shadow .3s}
+.vt .cd.flash{color:#FFD97A;text-shadow:0 0 14px rgba(255,154,31,.8)}
+@media(max-width:780px){.vt .cap{min-height:3.4em}}
 /* journal teaser */
 .kte{display:grid;gap:16px;grid-template-columns:1fr}
 @media(min-width:780px){.kte{grid-template-columns:1.1fr .9fr;align-items:center}}
