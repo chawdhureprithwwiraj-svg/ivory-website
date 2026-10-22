@@ -45,6 +45,8 @@ vault:function(){tone(110,0,2.6,'sine',.5);tone(276,0,1.8,'sine',.18);tone(412,0
 mark:function(){var f=P[mi%5]*((mi/5|0)?2:1);mi=(mi+1)%10;tone(f,0,.35,'sine',.35);tone(f*2,0,.15,'sine',.12);},
 share:function(){noise(0,.5,'highpass',3000,.25);tone(1568,0,.6,'sine',.25);},
 emblem:function(){tone(2093,0,.12,'sine',.15);},
+nav:function(){tone(392,0,.25,'sine',.22);tone(587.33,.02,.18,'sine',.12);},
+tap:function(){tone(1046.5,0,.1,'sine',.07);noise(0,.06,'highpass',4000,.05);},
 bellchime:function(){tone(880,0,1.2,'sine',.4);tone(1318,.06,1,'sine',.22);tone(1760,.12,.8,'sine',.12);}};
 function play(n){if(!muted&&V[n])V[n]();}
 function toggle(){muted=!muted;try{localStorage.setItem('ivory_sound',muted?'off':'on');}catch(e){}return muted;}
@@ -57,12 +59,12 @@ function paint(){mb.innerHTML=SH.muted()?'&#128277;':'&#128276;';}
 mb.addEventListener('click',function(){SH.toggle();paint();});
 document.addEventListener('DOMContentLoaded',function(){document.body.appendChild(mb);paint();});
 if(document.body){document.body.appendChild(mb);paint();}
-var RULES=[['#ringbtn','bellchime'],['.sharebtn','share'],['.ko .opt','coin'],['.spine','spine'],['#markbox','mark'],['.vt .door','vault'],['summary','faq'],['#tk','ticker'],['.btn-outline','outline'],['.btn','btn'],['a','link']];
+var RULES=[['#ringbtn','bellchime'],['.sharebtn','share'],['.ko .opt','coin'],['.spine','spine'],['#markbox','mark'],['.vt .door','vault'],['summary','faq'],['#tk','ticker'],['.btn-outline','outline'],['.btn','btn'],['a','link'],['.nav','nav']];
 document.addEventListener('pointerdown',function(e){
 if(e.target.closest&&e.target.closest('.sndbtn'))return;
 for(var i=0;i<RULES.length;i++){if(e.target.closest&&e.target.closest(RULES[i][0])){SH.play(RULES[i][1]);return;}}
 var im=e.target.closest?e.target.closest('img'):null;
-if(im&&/emblem|Ivory/i.test(im.getAttribute('alt')||''))SH.play('emblem');
+if(im&&/emblem|Ivory/i.test(im.getAttribute('alt')||''))SH.play('emblem');else SH.play('tap');
 },true);
 })();
 /* ---- 1 · the house ticker ---- */
