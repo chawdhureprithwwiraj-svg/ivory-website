@@ -1,0 +1,29 @@
+/* Ivory life layer - scroll thread, kinetic hero, stagger, ripples, jewel borders, lift, tint, glide. */
+#thread{position:fixed;top:0;left:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,#D4AF37,#FF9A1F,#D42450);z-index:999;pointer-events:none;animation:thread linear both;animation-timeline:scroll(root)}
+@keyframes thread{to{transform:scaleX(1)}}
+@supports not (animation-timeline:scroll(root)){#thread{display:none}}
+.hero em{background:linear-gradient(100deg,#E9C767 18%,#FFF3C4 38%,#FFD97A 52%,#E9C767 70%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sweep 2.6s ease-out .3s 1 both}
+@keyframes sweep{from{background-position:130% 0}to{background-position:-30% 0}}
+@supports not ((-webkit-background-clip:text) or (background-clip:text)){.hero em{background:none;color:#E9C767}}
+.rv>*{opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease}
+.rv.in>*{opacity:1;transform:none}
+.rv.in>*:nth-child(2){transition-delay:.07s}.rv.in>*:nth-child(3){transition-delay:.14s}.rv.in>*:nth-child(4){transition-delay:.21s}.rv.in>*:nth-child(5){transition-delay:.28s}.rv.in>*:nth-child(6){transition-delay:.35s}.rv.in>*:nth-child(7){transition-delay:.42s}.rv.in>*:nth-child(8){transition-delay:.49s}
+.rip{position:fixed;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:radial-gradient(circle,rgba(255,243,196,.95),rgba(212,175,55,0) 70%);pointer-events:none;z-index:998;animation:rip .5s ease-out both}
+@keyframes rip{from{transform:scale(.4);opacity:.9}to{transform:scale(3.4);opacity:0}}
+.card{transition:transform .25s ease,box-shadow .25s ease}
+.card:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(74,14,23,.16)}
+.card:active{transform:translateY(1px)}
+@keyframes jewel{0%,100%{border-color:rgba(212,36,80,.5)}25%{border-color:rgba(255,154,31,.5)}50%{border-color:rgba(20,184,122,.45)}75%{border-color:rgba(154,85,230,.5)}}
+@supports selector(.a:has(*)){section:has(#bellring),section:has(.vt),section:has(#ko){border:1px solid transparent;animation:jewel 9s linear infinite}}
+.med{animation:medturn .6s ease both}
+@keyframes medturn{from{transform:rotate(-90deg) scale(.6)}}
+circle.comet{animation:cometk 2s ease-out 1}
+@keyframes cometk{0%{filter:drop-shadow(0 0 2px #FF9A1F)}30%{filter:drop-shadow(0 0 9px #FFD97A)}100%{filter:drop-shadow(0 0 2px #FF9A1F)}}
+body.m-dawn{background-image:linear-gradient(180deg,rgba(255,154,31,.06),rgba(250,245,233,0) 34%)}
+body.m-morn,body.m-day{background-image:linear-gradient(180deg,rgba(255,111,165,.05),rgba(250,245,233,0) 34%)}
+body.m-eve{background-image:linear-gradient(180deg,rgba(212,36,80,.05),rgba(250,245,233,0) 34%)}
+body.m-night{background-image:linear-gradient(180deg,rgba(154,85,230,.07),rgba(250,245,233,0) 34%)}
+::view-transition-old(root){animation:vtout .18s ease both}::view-transition-new(root){animation:vtin .18s ease both}
+@keyframes vtout{to{opacity:0}}@keyframes vtin{from{opacity:0}}
+@media(prefers-reduced-motion:reduce){#thread{display:none}.hero em{animation:none;background:none;color:#E9C767}.rv>*{opacity:1;transform:none;transition:none}.rip,.med,circle.comet{animation:none}.card:hover,.card:active{transform:none}section:has(#bellring){animation:none}}
+/* END OF FILE - life.css */
