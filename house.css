@@ -9,7 +9,7 @@ body::-webkit-scrollbar{width:10px}body::-webkit-scrollbar-track{background:#F6E
 /* headings wear a jewel underline */
 h2{position:relative}
 h2:after{content:"";display:block;width:70px;height:3px;margin:10px 0 0;border-radius:99px;background:var(--jg);background-size:220% 100%;animation:jflow 9s linear infinite}
-.head h2:after,.cta h2:after,.screen h2:after,.kte h2:after,.jbox h2:after,.stage h2:after{margin-left:auto;margin-right:auto}
+.head h2:after,.cta h2:after,.screen h2:after,.jbox h2:after,.stage h2:after,.story h2:after{margin-left:auto;margin-right:auto}
 /* contact boxes on the policy pages wear a jewel spine */
 .box{position:relative;overflow:hidden}
 .box:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,#D42450,#FF9A1F,#D4AF37,#14B87A,#9A55E6)}
@@ -35,7 +35,7 @@ h2:after{content:"";display:block;width:70px;height:3px;margin:10px 0 0;border-r
 .grid .card:nth-child(6n+5) .num{background:linear-gradient(135deg,#FF9A1F,#E3A857);border-color:rgba(255,154,31,.6)}
 .grid .card:nth-child(6n+6) .num{background:linear-gradient(135deg,#FF6FA5,#D42450);color:#FFF8E8;border-color:rgba(255,111,165,.6)}
 /* the ribbon flows through jewels */
-.ribbon{background:linear-gradient(90deg,#E3A857,#D4AF37,#14B87A,#9A55E6,#D42450,#FF9A1F,#E3A857);background-size:300% 100%;animation:jflow 16s linear infinite;color:#FFF8E8;text-shadow:0 1px 2px rgba(74,14,23,.5)}
+.ribbon{background:linear-gradient(90deg,#E3A857,#D4AF37,#14B87A,#9A55E6,#D42450,#FF9A1F,#E3A857);background-size:300% 100%;animation:jflow 16s linear infinite;color:#FFF8E8;text-shadow:0 1px 3px rgba(42,7,16,.72)}
 /* every gold button carries a slow sheen */
 .btn{position:relative;overflow:hidden}
 .btn:after{content:"";position:absolute;top:0;left:-70%;width:38%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.6),transparent);animation:btnsh 4.6s ease-in-out infinite;pointer-events:none}
@@ -131,13 +131,32 @@ h2:after{content:"";display:block;width:70px;height:3px;margin:10px 0 0;border-r
 .jentry h3{margin:6px 0 8px;font-size:19px;color:#4A0E17}
 .jentry p{margin:0 0 8px;color:rgba(74,14,23,.78);font-size:13.5px}
 .jentry p:last-child{margin:0}
+
+/* round 4 — fixes and heartbeats */
+:focus-visible{outline:2px solid #D4AF37;outline-offset:2px}
+.kte .btn-outline{background:none;border:1px solid rgba(74,14,23,.55);color:#4A0E17}
+.openband{padding:12px 16px;background:linear-gradient(90deg,#D4AF37,#E3A857,#D4AF37);background-size:220% 100%;animation:jflow 6s linear infinite;color:#3B0B14;font:950 11px/1.6 Verdana,sans-serif;letter-spacing:.12em;text-align:center}
+.openband[hidden]{display:none}
+.moodline{color:#F2D77C;font:italic 950 13px/1.6 Georgia,serif;margin-top:10px;min-height:22px;text-shadow:0 0 14px rgba(212,175,55,.35)}
+.bellwrap{text-align:center}
+#bellring{max-width:70vw;height:auto}
+.bellcap{min-height:42px;max-width:430px;margin:8px auto 12px;color:#F2D77C;font:13px/1.6 Georgia,serif}
+.marks{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:16px 0 12px}
+.marks i{width:24px;height:24px;border-radius:50%;background:rgba(212,175,55,.16);border:1px solid rgba(212,175,55,.5);transition:background .3s,box-shadow .3s}
+.marks i.on{background:radial-gradient(circle at 35% 30%,#F6DC8A,#D4AF37 70%);box-shadow:0 0 12px rgba(212,175,55,.8)}
+.treasure{width:84px;height:64px;margin:4px auto 0;border-radius:10px;background:linear-gradient(160deg,#8a5a12,#A8731A 40%,#6b470d);border:2px solid #D4AF37;position:relative;overflow:hidden;box-shadow:0 10px 24px rgba(0,0,0,.45)}
+.treasure:before{content:"";position:absolute;left:0;right:0;top:0;height:18px;background:linear-gradient(180deg,#C9962B,#8a5a12);border-bottom:2px solid #D4AF37;transform-origin:bottom left;transition:transform .7s}
+.treasure.open:before{transform:rotate(-28deg)}
+.treasure .gl{position:absolute;inset:16px 7px 5px;background:radial-gradient(circle at 50% 80%,#FFF3C4,#D4AF37 60%,transparent 78%);opacity:0;transition:opacity .7s .2s}
+.treasure.open .gl{opacity:1}
+.tk .med.p{outline:2px solid rgba(255,248,232,.9);outline-offset:1px}
+
 /* reduced motion: the house sits still */
 @media(prefers-reduced-motion:reduce){
-body:before,.ribbon,.btn:after,h2:after{animation:none}
+body:before,.ribbon,.btn:after,h2:after,.openband{animation:none}
 .tk .track{animation:none}
 .hero-card #dust{display:none}
 .rv{opacity:1;transform:none;transition:none}
 .vt .door:after{animation:none}
 }
 /* END OF FILE - house.css */
-                                                                                                                                                                                                                                                                                                                                                                                                      
