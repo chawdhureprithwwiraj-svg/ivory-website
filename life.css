@@ -8,7 +8,7 @@
 .rv>*{opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease}
 .rv.in>*{opacity:1;transform:none}
 .rv.in>*:nth-child(2){transition-delay:.07s}.rv.in>*:nth-child(3){transition-delay:.14s}.rv.in>*:nth-child(4){transition-delay:.21s}.rv.in>*:nth-child(5){transition-delay:.28s}.rv.in>*:nth-child(6){transition-delay:.35s}.rv.in>*:nth-child(7){transition-delay:.42s}.rv.in>*:nth-child(8){transition-delay:.49s}
-.rip{position:fixed;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:radial-gradient(circle,rgba(255,243,196,.95),rgba(212,175,55,0) 70%);pointer-events:none;z-index:998;animation:rip .5s ease-out both}
+.rip{position:fixed;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;pointer-events:none;z-index:998;background:radial-gradient(circle,rgba(255,243,196,.85),rgba(212,175,55,.28) 55%,rgba(212,175,55,0) 72%);box-shadow:0 0 0 2px rgba(212,175,55,.8),0 0 12px rgba(255,154,31,.55),0 2px 8px rgba(74,14,23,.35);animation:rip .55s ease-out both}
 @keyframes rip{from{transform:scale(.4);opacity:.9}to{transform:scale(3.4);opacity:0}}
 .card{transition:transform .25s ease,box-shadow .25s ease}
 .card:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(74,14,23,.16)}
@@ -18,6 +18,8 @@
 .med{animation:medturn .6s ease both}
 @keyframes medturn{from{transform:rotate(-90deg) scale(.6)}}
 circle.comet{animation:cometk 2s ease-out 1}
+circle.trail{animation:trailfade .9s ease-out both;pointer-events:none}
+@keyframes trailfade{from{opacity:.55}to{opacity:0}}
 @keyframes cometk{0%{filter:drop-shadow(0 0 2px #FF9A1F)}30%{filter:drop-shadow(0 0 9px #FFD97A)}100%{filter:drop-shadow(0 0 2px #FF9A1F)}}
 body.m-dawn{background-image:linear-gradient(180deg,rgba(255,154,31,.06),rgba(250,245,233,0) 34%)}
 body.m-morn,body.m-day{background-image:linear-gradient(180deg,rgba(255,111,165,.05),rgba(250,245,233,0) 34%)}
