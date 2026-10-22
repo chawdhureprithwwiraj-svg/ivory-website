@@ -1,0 +1,11 @@
+{
+"name":"Ivory - a private world of storytelling",
+"short_name":"Ivory",
+"start_url":"/",
+"display":"standalone",
+"background_color":"#FAF5E9",
+"theme_color":"#4A0E17",
+"description":"A private, consent-first house of real-life storytelling for adults.",
+"icons":[{"src":"ivory-logo.webp","sizes":"any","type":"image/webp","purpose":"any"}]
+}
+}
