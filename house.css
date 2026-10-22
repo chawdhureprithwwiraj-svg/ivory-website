@@ -41,7 +41,7 @@ h2:after{content:"";display:block;width:70px;height:3px;margin:10px 0 0;border-r
 .btn:after{content:"";position:absolute;top:0;left:-70%;width:38%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.6),transparent);animation:btnsh 4.6s ease-in-out infinite;pointer-events:none}
 @keyframes btnsh{0%{left:-70%}55%,100%{left:135%}}
 /* scroll reveal */
-.rv{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease}
+.rv{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}
 .rv.in{opacity:1;transform:none}
 /* release pulse chip */
 .pulse{display:inline-block;margin-left:8px;padding:4px 10px;border-radius:99px;border:1px solid rgba(212,175,55,.7);background:rgba(212,175,55,.14);color:#F2D77C;font:900 8px/1.5 Verdana,sans-serif;letter-spacing:.12em;vertical-align:middle}
@@ -95,6 +95,7 @@ h2:after{content:"";display:block;width:70px;height:3px;margin:10px 0 0;border-r
 /* 5 + 6 · shelf and vault, side by side on wide screens */
 .duo{display:grid;gap:18px;grid-template-columns:1fr}
 @media(min-width:780px){.duo{grid-template-columns:1fr 1fr}}
+@media(max-width:780px){.clk{flex-direction:column;align-items:center;text-align:center}.clk .rungs{margin:6px auto 0}.clk .lbl{text-align:center}}
 .sh{text-align:center;padding:6px 4px 0}
 .sh .spines{display:flex;gap:12px;justify-content:center;align-items:flex-end;height:126px}
 .sh .spine{width:46px;border-radius:8px 8px 3px 3px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:10px 0;cursor:pointer;color:#3B0B14;font:950 15px/1 Georgia,serif;box-shadow:0 10px 22px rgba(0,0,0,.45),inset 0 2px 3px rgba(255,255,255,.5);user-select:none}
@@ -140,7 +141,7 @@ h2:after{content:"";display:block;width:70px;height:3px;margin:10px 0 0;border-r
 .moodline{color:#F2D77C;font:italic 950 13px/1.6 Georgia,serif;margin-top:10px;min-height:22px;text-shadow:0 0 14px rgba(212,175,55,.35)}
 .bellwrap{text-align:center}
 #bellring{max-width:70vw;height:auto}
-.bellcap{min-height:42px;max-width:430px;margin:8px auto 12px;color:#F2D77C;font:13px/1.6 Georgia,serif}
+.bellcap{min-height:42px;max-width:430px;margin:8px auto 12px;color:#F2D77C;font:13px/1.6 Georgia,serif;transition:opacity .45s}
 .marks{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:16px 0 12px}
 .marks i{width:24px;height:24px;border-radius:50%;background:rgba(212,175,55,.16);border:1px solid rgba(212,175,55,.5);transition:background .3s,box-shadow .3s}
 .marks i.on{background:radial-gradient(circle at 35% 30%,#F6DC8A,#D4AF37 70%);box-shadow:0 0 12px rgba(212,175,55,.8)}
@@ -150,6 +151,7 @@ h2:after{content:"";display:block;width:70px;height:3px;margin:10px 0 0;border-r
 .treasure .gl{position:absolute;inset:16px 7px 5px;background:radial-gradient(circle at 50% 80%,#FFF3C4,#D4AF37 60%,transparent 78%);opacity:0;transition:opacity .7s .2s}
 .treasure.open .gl{opacity:1}
 .tk .med.p{outline:2px solid rgba(255,248,232,.9);outline-offset:1px}
+.sndbtn{position:fixed;right:14px;bottom:14px;width:46px;height:46px;border-radius:50%;border:1px solid rgba(212,175,55,.8);background:linear-gradient(160deg,#5C1222,#4A0E17);color:#F2D77C;font-size:17px;line-height:1;z-index:998;cursor:pointer;box-shadow:0 8px 20px rgba(74,14,23,.4);display:flex;align-items:center;justify-content:center;padding:0}
 
 /* reduced motion: the house sits still */
 @media(prefers-reduced-motion:reduce){
