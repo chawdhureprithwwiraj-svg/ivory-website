@@ -2,6 +2,7 @@
 (function(){
 var RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
 if(!RM){var th=document.createElement('div');th.id='thread';document.body.appendChild(th);}
+[['#bellring'],['.vt'],['#ko']].forEach(function(q){var e=document.querySelector(q[0]);if(e&&e.closest)e.closest('section')&&e.closest('section').classList.add('jew');});
 document.addEventListener('pointerdown',function(e){if(RM)return;var r=document.createElement('span');r.className='rip';r.style.left=e.clientX+'px';r.style.top=e.clientY+'px';document.body.appendChild(r);setTimeout(function(){if(r.parentNode)r.parentNode.removeChild(r);},520);},true);
 function tint(){var d=new Date();var u=d.getTime()+d.getTimezoneOffset()*60000;var h=new Date(u+19800000).getHours();
 var c=h<4?'m-night':h<8?'m-dawn':h<12?'m-morn':h<17?'m-day':h<21?'m-eve':'m-night';
