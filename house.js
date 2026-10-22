@@ -40,8 +40,8 @@ ticker:function(){noise(0,.4,'lowpass',700,.3);},
 coin:function(){tone(1046,0,.14,'triangle',.35);tone(1568,.09,.3,'triangle',.3);},
 right:function(){tone(523.25,0,.4,'triangle',.4);tone(659.25,.09,.4,'triangle',.4);tone(783.99,.18,.6,'triangle',.45);tone(1046.5,.27,.9,'sine',.3);},
 wrong:function(){tone(196,0,.9,'sine',.35);tone(247,.02,.8,'sine',.2);},
-spine:function(){noise(0,.08,'bandpass',950,.5,3);tone(520,0,.12,'sine',.32);tone(1560,.01,.05,'sine',.12);},
-vault:function(){tone(110,0,2.2,'sine',.22);tone(528,0,1.9,'sine',.3);tone(664,0,1.5,'sine',.2);tone(792,0,1.1,'sine',.13);noise(0,.35,'bandpass',2100,.22,1.4);},
+spine:function(){noise(0,.09,'bandpass',320,.5,2);tone(180,0,.2,'sine',.4);},
+vault:function(){tone(110,0,2.6,'sine',.5);tone(276,0,1.8,'sine',.18);tone(412,0,1.2,'sine',.1);noise(0,.5,'lowpass',300,.2);},
 mark:function(){var f=P[mi%5]*((mi/5|0)?2:1);mi=(mi+1)%10;tone(f,0,.35,'sine',.35);tone(f*2,0,.15,'sine',.12);},
 share:function(){noise(0,.5,'highpass',3000,.25);tone(1568,0,.6,'sine',.25);},
 emblem:function(){tone(2093,0,.12,'sine',.15);},
@@ -57,7 +57,7 @@ function paint(){mb.innerHTML=SH.muted()?'&#128277;':'&#128276;';}
 mb.addEventListener('click',function(){SH.toggle();paint();});
 document.addEventListener('DOMContentLoaded',function(){document.body.appendChild(mb);paint();});
 if(document.body){document.body.appendChild(mb);paint();}
-var RULES=[['#ringbtn','bellchime'],['.sharebtn','share'],['.ko .opt','coin'],['.spine','spine'],['#markbox','mark'],['.vt .door','vault'],['summary','faq'],['.tk','ticker'],['.btn-outline','outline'],['.btn','btn'],['a','link']];
+var RULES=[['#ringbtn','bellchime'],['.sharebtn','share'],['.ko .opt','coin'],['.spine','spine'],['#markbox','mark'],['.vt .door','vault'],['summary','faq'],['#tk','ticker'],['.btn-outline','outline'],['.btn','btn'],['a','link']];
 document.addEventListener('pointerdown',function(e){
 if(e.target.closest&&e.target.closest('.sndbtn'))return;
 for(var i=0;i<RULES.length;i++){if(e.target.closest&&e.target.closest(RULES[i][0])){SH.play(RULES[i][1]);return;}}
@@ -71,9 +71,8 @@ var L=['The Ladder turns at four in the morning, house time.','Marks are earned,
 var C=['#D4AF37','#D42450','#FF9A1F','#14B87A','#9A55E6','#FF6FA5','#E3A857','#07402C','#D4AF37','#D42450'];
 var h='';for(var r=0;r<2;r++){for(var i=0;i<L.length;i++){h+='<span class="msg"><span class="med" style="background:radial-gradient(circle at 35% 30%,#FFF3C4,'+C[i]+' 72%)">'+(i+1)+'</span>'+L[i]+'</span>';}}
 $('#tkt').innerHTML=h;
+var tk=$('#tk');tk.addEventListener('click',function(){tk.classList.toggle('paused');SH.play('ticker')});
 })();}
-/* ---- 1b · any ribbon hushes and holds ---- */
-$$('.tk').forEach(function(tk){tk.addEventListener('click',function(){tk.classList.toggle('paused');});});
 /* ---- 2 · house clock and the ladder strip ---- */
 if($('#hclock')){(function(){
 var rg=$('#rungs');if(rg&&!rg.children.length){for(var i=0;i<12;i++){var e=document.createElement('i');e.style.height=(18+i*3)+'px';rg.appendChild(e);}}
@@ -113,7 +112,7 @@ $$('img').forEach(function(im){var alt=(im.getAttribute('alt')||'');if(/emblem|I
 /* ---- 5 · the firstlist shelf ---- */
 if($$('.spine').length){(function(){
 var l=$('#shlock');
-$$('.spine').forEach(function(s){s.addEventListener('click',function(){s.classList.remove('shake');void s.offsetWidth;s.classList.add('shake');
+$$('.spine').forEach(function(s){s.addEventListener('click',function(){s.classList.remove('shake');void s.offsetWidth;s.classList.add('shake');SH.play('spine');
 if(l){l.textContent='Spine '+s.getAttribute('data-l')+' is locked. The Firstlist opens in the app.';setTimeout(function(){l.textContent='Chosen by Ivory, in order.';},2800);}});});
 })();}
 /* ---- 6 · the vault countdown ---- */
@@ -121,10 +120,6 @@ if($('#vcd')){(function(){
 function tick(){var d=ist();var t=new Date(d);t.setHours(24,0,0,0);var s=Math.max(0,Math.floor((t-d)/1000));
 $('#vcd').textContent=p2(Math.floor(s/3600))+':'+p2(Math.floor(s/60)%60)+':'+p2(s%60);}
 tick();setInterval(tick,1000);
-var dr=document.querySelector('.vt .door');if(dr){var cap=document.querySelector('.vt .cap'),rest=cap?cap.textContent:'',cd=$('#vcd'),kt;
-dr.addEventListener('click',function(){dr.classList.add('knock');if(cd)cd.classList.add('flash');
-if(cap)cap.textContent='THE VAULT HEARS YOU. IT OPENS AT MIDNIGHT, HOUSE TIME.';clearTimeout(kt);
-kt=setTimeout(function(){dr.classList.remove('knock');if(cd)cd.classList.remove('flash');if(cap)cap.textContent=rest;},2800);});}
 })();}
 /* ---- 7 · gold dust in the hero ---- */
 if($('#dust')&&!RM){(function(){
@@ -193,20 +188,20 @@ var day=3,hold=0,REST='The light walks the ring. Fourteen bells wait on 202 days
 function frame(t){if(!last)last=t;var dt=Math.min(80,t-last);last=t;day=(day+dt*0.0015)%202;
 var a=day/202*6.2832-1.5708;sweep.setAttribute('cx',C+Math.cos(a)*95);sweep.setAttribute('cy',C+Math.sin(a)*95);
 var b=null;for(var i=0;i<SET.length;i++){if(Math.abs(day-SET[i])<.5)b=SET[i];}
-if(b!==null&&b!==lastBell){lastBell=b;sweep.setAttribute('r',6.5);setTimeout(function(){sweep.setAttribute('r',3.6);},500);
+if(b!==null&&b!==lastBell){lastBell=b;window.dispatchEvent(new CustomEvent('ivory:bell'));sweep.setAttribute('r',6.5);setTimeout(function(){sweep.setAttribute('r',3.6);},500);
 var now=Date.now();
 if(now-lastSay>8000&&cap){lastSay=now;hold=4000;cap.style.opacity=0;setTimeout(function(){cap.textContent='Day '+b+': a bell falls. The house rings it once, softly, and writes it in your book.';cap.style.opacity=1;},450);}}
 if(b===null)lastBell=-1;
 if(hold>0){hold-=dt;if(hold<=0&&cap){cap.style.opacity=0;setTimeout(function(){cap.textContent=REST;cap.style.opacity=1;},450);}}
 requestAnimationFrame(frame);}
 requestAnimationFrame(frame);
-var rb=$('#ringbtn');if(rb)rb.addEventListener('click',function(){SH.play('bellchime');svg.style.transition='transform .18s';svg.style.transform='rotate(3deg)';setTimeout(function(){svg.style.transform='rotate(-3deg)'},180);setTimeout(function(){svg.style.transform=''},360);});
+var rb=$('#ringbtn');if(rb)rb.addEventListener('click',function(){svg.style.transition='transform .18s';svg.style.transform='rotate(3deg)';setTimeout(function(){svg.style.transform='rotate(-3deg)'},180);setTimeout(function(){svg.style.transform=''},360);});
 })();}
 /* ---- 11 · ten marks, one treasure ---- */
 if($('#marks')){(function(){
 var box=$('#marks'),n=0,done=false;for(var i=0;i<10;i++)box.appendChild(document.createElement('i'));
 var cap=$('#markcap'),wrap=$('#markbox')||box;
-wrap.addEventListener('click',function(){if(done)return;SH.play('mark');n=Math.min(10,n+1);
+wrap.addEventListener('click',function(){if(done)return;n=Math.min(10,n+1);
 var k=box.children;for(var i=0;i<n;i++)k[i].classList.add('on');
 if(n>=10){done=true;$('#treas').classList.add('open');cap.textContent='TEN MARKS, EARNED NOT BOUGHT \u00b7 THE FIRST TREASURE OPENS \u00b7 AGAIN AT 25, AND AT ALL';}
 else cap.textContent='MARK '+n+' OF 10 \u00b7 EARNED, NEVER BOUGHT';});
