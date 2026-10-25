@@ -80,12 +80,11 @@ if(ready){const b=document.getElementById('releaseButton');b.href=RELEASE.url;b.
         var a=null;for(var i=0;i<d.assets.length;i++){if(d.assets[i].name==='app-release.apk')a=d.assets[i];}
         var sha=a&&a.digest?String(a.digest).replace('sha256:',''):'';
         if(d.tag_name&&sha.length>=8)apply(d.tag_name,sha,a?a.size:0);
-      }).catch(e){}
+      }).catch(function(){});
+  }catch(e){}
 })();
 </script>
 </body></html>
 <!-- END OF FILE - download.html -->
-
-
 
        
