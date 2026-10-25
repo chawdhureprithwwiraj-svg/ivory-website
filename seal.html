@@ -46,7 +46,7 @@ h1{font:600 clamp(26px,6vw,34px)/1.15 Georgia,serif;margin:10px 0 4px;color:#3B0
 <h1>The house card</h1>
 <p class="tag">Where every story leaves a mark</p>
 <span class="qrbox"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAIAAADdBSngAAAEVklEQVR42u3dwY3bMBQE0CRIBekh1aTeVJMectjzAkkBeyGImU+u/N7ZlmVpQOKLIvn13/vbF7jPN5cA0QTRRDRBNBFNEE0QTUQTRBPRhGnfVz7068fPg6f4+++f0pE//q+931o5zso1TP36ypHvv6daTXToIJqIJogmKvTbqubet3r1+N5vTf6L+++pVhMdOogmogmiiQp9sgqbHLNOfSZVs6fOMHU+tz0x0GqiQwfRRDRBNFGhf0a9ce1e7X925F2rCaKJaIJoIpqgQm9IVbKpMfRUHT05n12rCaKJaIJoIprwjAr9/qpwcr526u30s/X42Xuq1USHDqKJaIJookJfcf+b1b1Z3pO/dXZevFYTRBPRBNFENOG2Cv0Zb00/4xlC6n7df0+1mogmiCaiCaLJi/n67/3tYC2ZqjdTb4P3jtNb3b33T3v3S6uJDh1EE9EE0YQPPuU89Nuq1Ge8Vb5yDVO71a9cH60mOnQQTUQTRBMVeqpGnqwBzz4fmBwf37uGe3u97Z1zana/VhMdOogmogmiyYtZesu9V7P3Vma7rfruXcM9vVF+b7mjQwfRBNFENGFLbAx9skbujf+m1mBPXZ/UOfeeD/RWyNdqokMH0UQ0QTR5MZsrxfVMjj5PjuBPzgt4xlp2Wk106CCaiCaIJi9mcwy9N+97r76b3Dc8dZyze6an7kUvLVpNdOggmogmiCYq9FRNOllv9sa1UyPCvRo59byilwStJjp0EE1EE0QTUhV6b4753q/3KuvUW9yTM9z3TK6ib7c1dOggmogmiCYs2JyH3lsfbFJvfPzsXuepSj81x1yFjg4dRBPRBNGEVIW+V5M+o7a9bQ2621Z46z3l0GqiQwfRRDRBNFGhT9aSk296nx3Tn6ysn7Ebu1YTHTqIJqIJosmL+Z460OT64WfnxafOpzdmPal3hlpNdOggmogmiCYq9JVasrfG2tm9w87u2nb/Guwfv5W671pNdOggmogmiCYq9NSBUnVZr+JLnXNqBL835733Rn3v17Wa6NBBNBFNEE1U6KkD9dZyP1uzp86wV9f37k5qVztruaNDB9FENEE0YUFst7Wztfb9O4nfth967/mAMXR06CCaIJqIJvQq9NtMzme/rWqerJHPrtiv1USHDqKJaIJo8mI2V4qbtPLG+P2j2L293nrz/SefKmg10aGDaCKaIJqo0CdrrlS9mapJe9/aO05v1bXUHZx8GqDVRIcOoologmiiQu9VoL1KP/X2dW/PuNv+V4q13NGhg2iCaCKacFuFfr/eGPrku/GTO6D13h8who4OHUQT0QTRhKdW6JOzqvdGqCd3N9v7F3vnnPqWVhMdOogmogmiiQo9daBeRdyrdleO3KtkU/V46mpMrn6v1USHDqKJaIJoQqpCP7u6++Sqa3t1a2pMPzXHPDUHf+/umIeODh1EE9EE0YQFn3I/dLSaIJogmogmiCaiCaKJaIJogmgimlDwH9gE4k29RN05AAAAAElFTkSuQmCC" width="222" height="222" alt="The Ivory house seal: scan to open the official download page" style="display:block"></span>
-<p class="finger">BUILD 1692 &middot; SEAL 45CC 8AB8</p>
+<p class="finger" id="fingerLine">BUILD 1700 &middot; SEAL 6156 E779</p>
 <p class="addr">ivory-stories.pages.dev/download.html</p>
 <div class="rule"></div>
 <p class="note">Scan with any camera to receive the official Ivory app for Android - true stories, personal confessions and real crime from India, told aloud by real voices. Free to download, free to listen. The seal carries the first eight digits of the build's SHA-256; the page it opens prints the fingerprint in full, so you can verify before you install.</p>
@@ -54,5 +54,41 @@ h1{font:600 clamp(26px,6vw,34px)/1.15 Georgia,serif;margin:10px 0 4px;color:#3B0
 </div>
 <p class="how">House rule for the printed card: print it as it stands - seal, fingerprint and address together. A card whose fingerprint does not match the page it opens is not Ivory. Pin it at a desk, slip it into a press kit, hand it across a table; every card carries the house to one more phone.</p>
 </div>
+<script>
+/* LIVE RELEASE FOLLOWER (owner instruction, 26 Oct 2026): this page always
+   shows the newest signed release - number, seal, size and full SHA-256 -
+   fetched from the public GitHub API in the visitor's own browser.
+   The baked numbers above are the offline fallback; if the fetch never
+   answers, the page still tells the truth as of its last commit. */
+(function(){
+  function fmt8(sha){var h=sha.substring(0,8).toUpperCase();return h.substring(0,4)+' '+h.substring(4,8);}
+  function apply(tag,sha,size){
+    var n=tag.replace('build-','');
+    if(window.CUR){window.CUR.b=n;window.CUR.s=fmt8(sha);}
+    var f=document.getElementById('fingerLine');
+    if(f)f.textContent='BUILD '+n+' \u00b7 SEAL '+fmt8(sha);
+    var v=document.getElementById('releaseVersion');
+    if(v)v.textContent='Build '+n+' - the newest signed release';
+    var s=document.getElementById('releaseSize');
+    if(s&&size)s.textContent=size.toLocaleString('en-US')+' bytes (about '+Math.round(size/1048576)+' MB)';
+    var x=document.getElementById('releaseSha');
+    if(x)x.textContent=sha;
+    var b=document.getElementById('releaseButton');
+    if(b)b.href='https://github.com/chawdhureprithwwiraj-svg/Ivory-/releases/latest/download/app-release.apk';
+    var ld=document.querySelector('script[type="application/ld+json"]');
+    if(ld)ld.textContent=ld.textContent.replace(/build-\d+/g,'build-'+n);
+  }
+  try{
+    fetch('https://api.github.com/repos/chawdhureprithwwiraj-svg/Ivory-/releases/latest')
+      .then(function(r){return r.ok?r.json():null;})
+      .then(function(d){
+        if(!d||!d.assets)return;
+        var a=null;for(var i=0;i<d.assets.length;i++){if(d.assets[i].name==='app-release.apk')a=d.assets[i];}
+        var sha=a&&a.digest?String(a.digest).replace('sha256:',''):'';
+        if(d.tag_name&&sha.length>=8)apply(d.tag_name,sha,a?a.size:0);
+      }).catch(function(){});
+  }catch(e){}
+})();
+</script>
 </body></html>
 <!-- END OF FILE - seal.html -->
