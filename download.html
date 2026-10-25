@@ -47,7 +47,7 @@ if(ready){const b=document.getElementById('releaseButton');b.href=RELEASE.url;b.
 </script><script src="house.js" defer></script>
 <script src="life.js" defer></script>
 <script>
-(function(){var u="https://ivory-stories.pages.dev/download.html?from=seal";window.CUR=window.CUR||{b:"1700",s:"6156 E779"};function sealWords(){return "Ivory - where every story leaves a mark. True stories, confessions and real crime from India, told aloud. Free Android app, official page only: "+u";}var t=sealWords();function note(m){var n=document.getElementById("sealNote");if(n)n.textContent=m;}document.getElementById("sealShare").addEventListener("click",function(){if(navigator.share){navigator.share({title:"Ivory - the house seal",text:sealWords(),url:u}).then(function(){note("Thank you for carrying the house.");}).catch(function(){});}else if(navigator.clipboard){navigator.clipboard.writeText(sealWords()).then(function(){note("Your browser has no share sheet - the seal's words are copied instead.");});}else{note("Copy this page's address to share the house.");}});document.getElementById("sealCopy").addEventListener("click",function(){if(navigator.clipboard){navigator.clipboard.writeText(u).then(function(){note("Seal link copied.");});}else{note("Copy this page's address to share the house.");}});})();
+(function(){var u="https://ivory-stories.pages.dev/download.html?from=seal";window.CUR=window.CUR||{b:"1700",s:"6156 E779"};function sealWords(){return "Ivory - where every story leaves a mark. True stories, confessions and real crime from India, told aloud. Free Android app, official page only: "+u;}function note(m){var n=document.getElementById("sealNote");if(n)n.textContent=m;}function oldCopy(t){try{var ta=document.createElement("textarea");ta.value=t;ta.setAttribute("readonly","");ta.style.position="fixed";ta.style.top="-1000px";document.body.appendChild(ta);ta.select();ta.setSelectionRange(0,t.length);var ok=document.execCommand("copy");document.body.removeChild(ta);return ok;}catch(e){return false;}}function copyText(t,okMsg){if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(function(){note(okMsg);},function(){note(oldCopy(t)?okMsg:"Your browser blocked copying. Long-press the address bar and copy the link by hand - the house thanks you.");});}else{note(oldCopy(t)?okMsg:"Your browser blocked copying. Long-press the address bar and copy the link by hand - the house thanks you.");}}document.getElementById("sealShare").addEventListener("click",function(){if(navigator.share){navigator.share({title:"Ivory - the house seal",text:sealWords(),url:u}).then(function(){note("Thank you for carrying the house.");},function(e){if(e&&e.name==="AbortError"){note("Sharing cancelled - the house is still here.");}else{copyText(sealWords(),"No share sheet on this browser - the seal words are copied instead.");}});}else{copyText(sealWords(),"No share sheet on this browser - the seal words are copied instead.");}});document.getElementById("sealCopy").addEventListener("click",function(){copyText(u,"Seal link copied.");});})();
 </script><script>
 /* LIVE RELEASE FOLLOWER (owner instruction, 26 Oct 2026): this page always
    shows the newest signed release - number, seal, size and full SHA-256 -
@@ -80,9 +80,12 @@ if(ready){const b=document.getElementById('releaseButton');b.href=RELEASE.url;b.
         var a=null;for(var i=0;i<d.assets.length;i++){if(d.assets[i].name==='app-release.apk')a=d.assets[i];}
         var sha=a&&a.digest?String(a.digest).replace('sha256:',''):'';
         if(d.tag_name&&sha.length>=8)apply(d.tag_name,sha,a?a.size:0);
-      }).catch(function(){});
-  }catch(e){}
+      }).catch(e){}
 })();
 </script>
 </body></html>
 <!-- END OF FILE - download.html -->
+
+
+
+       
