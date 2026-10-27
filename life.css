@@ -29,4 +29,8 @@ body.m-night{background-image:linear-gradient(180deg,rgba(154,85,230,.07),rgba(2
 ::view-transition-old(root){animation:vtout .18s ease both}::view-transition-new(root){animation:vtin .18s ease both}
 @keyframes vtout{to{opacity:0}}@keyframes vtin{from{opacity:0}}
 @media(prefers-reduced-motion:reduce){#thread{display:none}.hero em{animation:none;background:none;color:#E9C767}.rv>*{opacity:1;transform:none;transition:none}.rip,.med,circle.comet{animation:none}.card:hover,.card:active{transform:none}}
+/* ---- round 13 mends: the cream h1 belongs to the dark hero only ---- */
+h1{color:#4A0E17}
+.hero-card h1{color:#FFF9EA}
+.foot>.footlinks,.foot>.copy{padding-left:14px;padding-right:14px}
 /* END OF FILE - life.css */
