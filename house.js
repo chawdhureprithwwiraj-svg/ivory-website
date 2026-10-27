@@ -142,18 +142,28 @@ if(RM||!('IntersectionObserver' in window)){$$('.rv').forEach(function(e){e.clas
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.05});
 $$('.rv').forEach(function(e){io.observe(e)});
 })();}
-/* ---- 8 · release pulse: reads the RELEASE box on the download page ---- */
+/* ---- 8 · release pulse: the newest signed build, straight from GitHub ---- */
+function ghLatest(cb){fetch('https://api.github.com/repos/chawdhureprithwwiraj-svg/Ivory-/releases/latest').then(function(r){return r.ok?r.json():null;}).then(function(d){var m=d&&d.tag_name?d.tag_name.match(/(\d+)/):null;cb(m?m[1]:'',d||null);}).catch(function(){cb('',null);});}
 if($('#pulse')){(function(){
 var el=$('#pulse');
+function show(num){el.textContent='BUILD '+num+' IS LIVE ON THE RELEASE PAGE';el.classList.add('live');
+var band=$('#openband');if(band){band.textContent='THE HOUSE IS OPEN \u00b7 BUILD '+num+' IS LIVE ON THE RELEASE PAGE';band.hidden=false;}
+el.hidden=false;}
+ghLatest(function(num,d){if(num){show(num);return;}
 fetch('download.html',{cache:'no-store'}).then(function(r){return r.text();}).then(function(t){
 var m=t.match(/status\s*:\s*['"](\w+)['"]/),v=t.match(/version\s*:\s*['"]([^'"]*)['"]/);
 var st=m?m[1]:'pending';
-if(st==='published'){el.textContent='BUILD '+(v&&v[1]?v[1]:'')+' IS LIVE ON THE RELEASE PAGE';el.classList.add('live');
-var band=$('#openband');if(band){band.textContent='THE HOUSE IS OPEN \u00b7 BUILD '+(v&&v[1]?v[1]:'')+' IS LIVE ON THE RELEASE PAGE';band.hidden=false;}}
-else{el.textContent='NEXT SELECTED BUILD: IN CHECKING';}
-el.hidden=false;
-}).catch(function(){el.hidden=true;});
+if(st==='published'){show(v&&v[1]?v[1]:'SELECTED');}
+else{el.textContent='NEXT SELECTED BUILD: IN CHECKING';el.hidden=false;}
+}).catch(function(){el.hidden=true;});});
 })();}
+/* ---- 12 · release follower: the download page tells the live truth ---- */
+if($('#releaseVersion')){(function(){ghLatest(function(num,d){if(!num)return;
+$('#releaseVersion').textContent='Build '+num;
+var de=$('#releaseDate');if(de&&d.published_at){var dt=new Date(d.published_at);var MO=['January','February','March','April','May','June','July','August','September','October','November','December'];de.textContent=dt.getUTCDate()+' '+MO[dt.getUTCMonth()]+' '+dt.getUTCFullYear();}
+var se=$('#releaseSize');if(se&&d.assets&&d.assets[0])se.textContent=(d.assets[0].size/1048576).toFixed(1)+' MB';
+var ne=$('#releaseNotes');if(ne&&!ne.textContent)ne.textContent='Every green build is signed with the house key and published as a GitHub Release; the button above always rolls to the newest signed build.';
+});})();}
 /* ---- 8 · share the house ---- */
 if($$('.sharebtn').length){(function(){
 function toast(msg){var d=document.createElement('div');d.className='toast';d.textContent=msg;document.body.appendChild(d);setTimeout(function(){d.remove();},2600);}
@@ -211,4 +221,4 @@ else cap.textContent='MARK '+n+' OF 10 \u00b7 EARNED, NEVER BOUGHT';});
 })();}
 })();
 /* END OF FILE - house.js */
-   
+
