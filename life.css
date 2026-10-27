@@ -1,3 +1,5 @@
+@import url("ivory.css");
+@import url("house.css");
 /* Ivory life layer - scroll thread, kinetic hero, stagger, ripples, jewel borders, lift, tint, glide. */
 #thread{position:fixed;top:0;left:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,#D4AF37,#FF9A1F,#D42450);z-index:999;pointer-events:none;animation:thread linear both;animation-timeline:scroll(root)}
 @keyframes thread{to{transform:scaleX(1)}}
